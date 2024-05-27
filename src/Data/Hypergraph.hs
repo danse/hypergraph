@@ -3,7 +3,7 @@ module Data.Hypergraph
     Hypergraph(Hypergraph),
     nodes,
     edges,
-    fromEdges, -- ^ because we don't have isos
+    fromEdges,
     edgeSets
   )
   where
@@ -37,6 +37,7 @@ edges = Lens.lens toEdges (const fromEdges)
     toEdges :: (Ord e, Ord n) => Hypergraph e n -> Map e (Set n)
     toEdges = inverseMapSet . view nodes
 
+-- | Because we don't have isos
 fromEdges :: (Ord e, Ord n) => Map e (Set n) -> Hypergraph e n
 fromEdges = Hypergraph . inverseMapSet
 
